@@ -1,0 +1,6 @@
+<h1>View upcoming events:</h1>
+<ul>
+  <% @events.each do | event | %>
+    <li><%= event.title %> at <%= event.location %></li>
+  <% end %>
+</ul>
