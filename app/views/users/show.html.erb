@@ -1,0 +1,14 @@
+<h1>These events are hosted by: <%= @creator.username %></h1>
+<p><%= link_to "Return to event overview", root_path %></p>
+<p><%= link_to "Create a new event", new_event_path %></p>
+<ul>
+    <% @events.each do | event |  %>
+        <li>
+            <%= link_to event.title, event_path(event) %>
+            <br>
+            <%= event.location %>
+            <br>
+            <%= event.planned_date %>
+        </li>
+    <% end %>
+</ul>

@@ -1,0 +1,8 @@
+<h1>Event details</h1>
+<p><%= link_to "Return to event overview", root_path %></p>
+
+<%= @event.title %> at <%= @event.location %>
+<br>
+<%= @event.planned_date %>
+<br>
+hosted by <%= link_to @event.creator.username, "/users/#{@event.creator.id}" %>
