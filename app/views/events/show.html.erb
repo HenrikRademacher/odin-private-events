@@ -6,3 +6,9 @@
 <%= @event.planned_date %>
 <br>
 hosted by <%= link_to @event.creator.username, "/users/#{@event.creator.id}" %>
+<br>
+<% if current_user.attended_events.include?(@event) %>
+    <%= link_to "Rescind attendance", destroy_invitation_path %>
+<% else %>
+    <%= link_to "Join this event", new_invitation_path %>
+<% end %>

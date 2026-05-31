@@ -12,3 +12,15 @@
         </li>
     <% end %>
 </ul>
+<h1>These events are attended by: <%= @creator.username%></h1>
+<ul>
+    <% @attended.each do | event | %>
+        <li>
+            <%= link_to event.title, event_path(event) %>
+            <br>
+            <%= event.location %>
+            <br>
+            <%= event.planned_date %>
+        </li>
+    <% end %>
+</ul>
