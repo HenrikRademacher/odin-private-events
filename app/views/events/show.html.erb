@@ -7,8 +7,8 @@
 <br>
 hosted by <%= link_to @event.creator.username, "/users/#{@event.creator.id}" %>
 <br>
-<% if current_user.attended_events.include?(@event) %>
-    <%= link_to "Rescind attendance", destroy_invitation_path %>
+<% if current_user && current_user.attended_events.include?(@event) %>
+    <%= button_to "Rescind attendance", destroy_invitation_path, method: :delete %>
 <% else %>
-    <%= link_to "Join this event", new_invitation_path %>
+    <%= button_to "Join this event", new_invitation_path, method: :post %>
 <% end %>
