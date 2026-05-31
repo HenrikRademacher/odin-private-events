@@ -14,13 +14,30 @@
 </ul>
 <h1>These events are attended by: <%= @creator.username%></h1>
 <ul>
+    <h2>Coming up:</h2>
     <% @attended.each do | event | %>
-        <li>
-            <%= link_to event.title, event_path(event) %>
-            <br>
-            <%= event.location %>
-            <br>
-            <%= event.planned_date %>
-        </li>
+        <% if event.planned_date.after?(DateTime.yesterday) %>
+            <li>
+                <%= link_to event.title, event_path(event) %>
+                <br>
+                <%= event.location %>
+                <br>
+                <%= event.planned_date %>
+            </li>
+        <% end %>
+    <% end %>
+</ul>
+<ul>
+    <h2>Previously attended:</h2>
+    <% @attended.each do | event | %>
+        <% if event.planned_date.before?(DateTime.now) %>
+            <li>
+                <%= link_to event.title, event_path(event) %>
+                <br>
+                <%= event.location %>
+                <br>
+                <%= event.planned_date %>
+            </li>
+        <% end %>
     <% end %>
 </ul>

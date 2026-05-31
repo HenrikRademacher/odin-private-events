@@ -12,3 +12,10 @@ hosted by <%= link_to @event.creator.username, "/users/#{@event.creator.id}" %>
 <% else %>
     <%= button_to "Join this event", new_invitation_path, method: :post %>
 <% end %>
+<br><br>
+<h2>Attendees:</h2>
+<ul>
+    <% @attendees.each do | attendee | %>
+        <li><%= attendee.username %></li>
+    <% end %>
+</ul>

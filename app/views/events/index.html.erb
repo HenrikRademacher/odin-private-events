@@ -10,7 +10,17 @@
 <h1>View upcoming events:</h1>
 <%= link_to "Create your event", new_event_path %>
 <ul>
-  <% @events.each do | event | %>
+  <% @future_events.each do | event | %>
+    <li>
+      <%= link_to event.title, event_path(event.id) %> at <%= event.location %>
+      <br>
+      hosted by <%= link_to event.creator.username, "/users/#{event.creator.id}" %>
+    </li>
+  <% end %>
+</ul>
+<h1>View past events:</h1>
+<ul>
+  <% @past_events.each do | event | %>
     <li>
       <%= link_to event.title, event_path(event.id) %> at <%= event.location %>
       <br>

@@ -1,10 +1,14 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, except: [ :show, :index ]
+
   def index
     @events = Event.all
+    @past_events = Event.past.all
+    @future_events = Event.future.all
   end
   def show
     @event = Event.find(params[:id])
+    @attendees = @event.attendees
   end
   def new
     @event = current_user.events.new
@@ -17,6 +21,8 @@ class EventsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+
 
   private
   def event_params
