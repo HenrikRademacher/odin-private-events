@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_31_110341) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_01_191834) do
   create_table "events", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.integer "creator_id"
+    t.boolean "is_private", default: false
     t.string "location"
     t.datetime "planned_date"
     t.string "title"
@@ -22,6 +23,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_31_110341) do
   end
 
   create_table "invitations", force: :cascade do |t|
+    t.boolean "accepted", default: false
     t.integer "attended_event_id"
     t.integer "attendee_id"
     t.datetime "created_at", null: false

@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   get "/users/new", to: "users#new"
   get "/users/:id", to: "users#show"
-  post "/invitations/new/:id", to: "invitations#new", as: :new_invitation
-  delete "/invitations/destroy/:id", to: "invitations#destroy", as: :destroy_invitation
+
+  resources :invitations
+
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker

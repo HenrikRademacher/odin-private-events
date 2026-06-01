@@ -7,12 +7,16 @@
 <br>
 hosted by <%= link_to @event.creator.username, "/users/#{@event.creator.id}" %>
 <br>
-<% if current_user && current_user.attended_events.include?(@event) %>
-    <%= button_to "Rescind attendance", destroy_invitation_path, method: :delete %>
-<% else %>
-    <%= button_to "Join this event", new_invitation_path, method: :post %>
-<% end %>
+
 <br><br>
+<% if current_user == @event.creator %>
+    <p>Invite a friend!</p>
+    <% @invitation = Invitation.new %>
+    <%= form_with model: @invitation do |form| %>
+        
+    <% end %>
+
+<% end %>
 <h2>Attendees:</h2>
 <ul>
     <% @attendees.each do | attendee | %>

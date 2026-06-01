@@ -12,6 +12,10 @@
         <%= form.label :planned_date %>
         <%= form.date_select :planned_date %>
     </div>
+    <div>
+        <%= form.label :is_private, "Make this event private" %>
+        <%= form.checkbox :is_private %>
+    </div>
     <%= form.submit %>
 <% end %>
 <%= button_to "Cancel", events_path, method: :get %>
