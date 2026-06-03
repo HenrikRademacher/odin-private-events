@@ -13,13 +13,22 @@ hosted by <%= link_to @event.creator.username, "/users/#{@event.creator.id}" %>
     <p>Invite a friend!</p>
     <% @invitation = Invitation.new %>
     <%= form_with model: @invitation do |form| %>
-        
+        <%= form.hidden_field :attended_event_id, value: @event.id %>
+        <%= form.label :attendee_id %>
+        <%= form.collection_select :attendee_id, User.order(:username), :id, :username %>
+        <%= form.submit %>
     <% end %>
 
 <% end %>
 <h2>Attendees:</h2>
 <ul>
     <% @attendees.each do | attendee | %>
-        <li><%= attendee.username %></li>
+        <li><%= attendee.attendee.username %></li>
+    <% end %>
+</ul>
+<h2>Awaiting response:</h2>
+<ul>
+    <% @invited.each do | invitee | %>
+        <li><%= invitee.attendee.username %> </li>
     <% end %>
 </ul>

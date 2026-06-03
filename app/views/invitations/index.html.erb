@@ -1,0 +1,12 @@
+<%= link_to "Return to events", root_path %>
+<br>
+<h1>These are your invitations:</h1>
+<br>
+<h2>Pending:</h2>
+<ul>
+    <% @invitations.each do | invitation | %>
+        <li><%= invitation.attended_event.title %></li>
+        <%= button_to "Decline", invitation, method: :delete %>
+        <br>
+    <% end %>
+</ul>

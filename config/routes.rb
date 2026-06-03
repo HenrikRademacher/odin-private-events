@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "/users/new", to: "users#new"
   get "/users/:id", to: "users#show"
 
+  get "/invitations/:id", to: "invitations#index"
   resources :invitations
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)

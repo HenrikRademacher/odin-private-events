@@ -4,4 +4,7 @@ class Invitation < ApplicationRecord
 
   validates :attended_event_id, :attendee_id, presence: true
   validates :attended_event_id, uniqueness: { scope: :attendee_id }
+
+  scope :accepted, -> { where("accepted = true") }
+  scope :pending, -> { where ("accepted = false") }
 end
