@@ -6,6 +6,14 @@ class InvitationsController < ApplicationController
   def index
     @invitations = current_user.invitations.includes(:attended_event)
   end
+  def update
+    @invitation = Invitation.find(params[:id])
+    if current_user == @invitation.attendee
+      @invitation.accepted = true
+      @invitation.save
+    end
+    redirect_to invitations_path
+  end
 
   def create
     @invitation = Invitation.new(invitation_params)

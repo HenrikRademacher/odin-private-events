@@ -1,12 +1,28 @@
 <%= link_to "Return to events", root_path %>
 <br>
 <h1>These are your invitations:</h1>
+<ul>
+    <% @invitations.each do | invitation | %>
+        <% if invitation.accepted == true %>
+        <li><%= invitation.attended_event.title %></li>
+        <%= button_to "Remove", invitation, method: :delete %>
+        <% end %>
+    <% end %>
+</ul>
+
 <br>
 <h2>Pending:</h2>
 <ul>
     <% @invitations.each do | invitation | %>
+        <% if invitation.accepted == false %>
         <li><%= invitation.attended_event.title %></li>
         <%= button_to "Decline", invitation, method: :delete %>
         <br>
+        <%= form_with model: invitation do |form| %>
+            <%= form.hidden_field :id %>
+            <%= form.hidden_field :accepted, value: true %>
+            <%= form.submit "Accept" %>
+        <% end %>
+        <% end %>
     <% end %>
 </ul>

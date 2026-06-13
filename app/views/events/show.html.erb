@@ -8,8 +8,12 @@
 hosted by <%= link_to @event.creator.username, "/users/#{@event.creator.id}" %>
 <br>
 
-<br><br>
+<% if @event.public? || current_user == @event.creator %>
+    
+<% end %>
+
 <% if current_user == @event.creator %>
+    <br><br>
     <p>Invite a friend!</p>
     <% @invitation = Invitation.new %>
     <%= form_with model: @invitation do |form| %>

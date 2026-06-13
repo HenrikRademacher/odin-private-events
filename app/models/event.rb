@@ -7,4 +7,9 @@ class Event < ApplicationRecord
 
   scope :past, -> { where("planned_date < '#{Date.today}'") }
   scope :future, -> { where("planned_date >= '#{Date.today}'") }
+
+  def public?
+    return false if self.is_private == true
+    true
+  end
 end
