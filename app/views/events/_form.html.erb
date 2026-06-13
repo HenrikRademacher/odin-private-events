@@ -1,0 +1,19 @@
+<%= form_with model: @event do |form| %>
+    <div>
+        <%= form.label :title %>
+        <%= form.text_field :title %>
+    </div>
+    <div>
+        <%= form.label :location %>
+        <%= form.text_field :location %>
+    </div>
+    <div>
+        <%= form.label :planned_date %>
+        <%= form.date_select :planned_date %>
+    </div>
+    <div>
+        <%= form.label :is_private, "Make this event private" %>
+        <%= form.checkbox :is_private %>
+    </div>
+    <%= form.submit %>
+<% end %>

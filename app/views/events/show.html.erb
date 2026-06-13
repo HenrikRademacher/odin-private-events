@@ -1,5 +1,9 @@
 <h1>Event details</h1>
 <p><%= link_to "Return to event overview", root_path %></p>
+<% if current_user == @event.creator %>
+    <p><%= button_to "Edit this event", edit_event_path(@event), method: :get %> </p>
+    <p><%= button_to "Delete this event", @event, method: :delete, data: { turbo_confirm: "Really delete this event?" } %> </p>
+<% end %>
 
 <%= @event.title %> at <%= @event.location %>
 <br>
@@ -10,7 +14,7 @@ hosted by <%= link_to @event.creator.username, "/users/#{@event.creator.id}" %>
 
 <% if @event.public? || current_user == @event.creator %>
     <% if current_user.attended_events.include?(@event) %>
-        <p>Remove this event</p>
+        <p>Remove yourself from this event</p>
         <% @invitation = Invitation.where(attended_event_id: @event.id).where(attendee_id: current_user.id).first %>
         <%= button_to "Remove", @invitation, method: :delete %>
     <% else %>

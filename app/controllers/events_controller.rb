@@ -22,7 +22,24 @@ class EventsController < ApplicationController
     end
   end
 
+  def edit
+    @event = Event.find(params[:id])
+  end
+  def update
+    @event = Event.find(params[:id])
+    return unless current_user == @event.creator
+    if @event.update(event_params)
+      redirect_to @event
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
+  def destroy
+    @event = Event.find(params[:id])
+    @event.destroy if current_user == @event.creator
+    redirect_to events_path
+  end
 
   private
   def event_params
