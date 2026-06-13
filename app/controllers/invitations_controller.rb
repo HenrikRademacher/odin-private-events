@@ -21,7 +21,7 @@ class InvitationsController < ApplicationController
     @attendee = User.find(params[:invitation][:attendee_id])
     @invitation.attended_event_id = @event.id if @event
     @invitation.attendee_id = @attendee.id if @attendee
-    @invitation.accepted = false
+    @invitation.accepted = false unless params[:invitation][:accepted] == "true" && (@event.public? || current_user == @event.creator)
     if @invitation.save
       redirect_to @event
     else
@@ -38,6 +38,6 @@ class InvitationsController < ApplicationController
 private
 
 def invitation_params
-  params.expect(invitation: [ :attendee_id, :attended_event_id ])
+  params.expect(invitation: [ :attendee_id, :attended_event_id, :accepted ])
 end
 end

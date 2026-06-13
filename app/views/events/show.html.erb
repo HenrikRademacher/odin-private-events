@@ -9,7 +9,20 @@ hosted by <%= link_to @event.creator.username, "/users/#{@event.creator.id}" %>
 <br>
 
 <% if @event.public? || current_user == @event.creator %>
-    
+    <% if current_user.attended_events.include?(@event) %>
+        <p>Remove this event</p>
+        <% @invitation = Invitation.where(attended_event_id: @event.id).where(attendee_id: current_user.id).first %>
+        <%= button_to "Remove", @invitation, method: :delete %>
+    <% else %>
+        <p>You may join this event without explicit invitation:</p>
+        <% @invitation = Invitation.new %>
+        <%= form_with model: @invitation do |form| %>
+            <%= form.hidden_field :attended_event_id, value: @event.id %>
+            <%= form.hidden_field :attendee_id, value: current_user.id %>
+            <%= form.hidden_field :accepted, value: true %>
+            <%= form.submit "Join this event" %>
+        <% end %>
+    <% end %>
 <% end %>
 
 <% if current_user == @event.creator %>
